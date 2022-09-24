@@ -1,0 +1,19 @@
+type Comment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String!
+  author: String!
+  postID: ID! @index(name: "byPost")
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  content: String!
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+}
+
+type Images @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  images: String
+}
+ 
